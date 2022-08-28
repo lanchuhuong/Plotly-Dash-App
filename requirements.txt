@@ -1,108 +1,12 @@
-ansi2html==1.8.0
-appnope==0.1.3
-asttokens==2.0.8
-attrs @ file:///opt/conda/conda-bld/attrs_1642510447205/work
-backcall==0.2.0
-Bottleneck @ file:///private/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_07078715-3ab7-4562-8d3d-d56b0eaa0f7dp504n_ny/croots/recipe/bottleneck_1657175566567/work
-branca==0.5.0
-Brotli==1.0.9
-certifi @ file:///private/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_884c889c-96af-444f-bd6d-daddb5e9a462ykj3l5n_/croots/recipe/certifi_1655968814730/work/certifi
-cfgv==3.3.1
-charset-normalizer==2.1.1
-click @ file:///private/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_croot-quwchbn8/click_1646123324461/work
-click-plugins @ file:///Users/ktietz/demo/mc3/conda-bld/click-plugins_1630665883852/work
-cligj==0.7.2
-cycler @ file:///tmp/build/80754af9/cycler_1637851556182/work
 dash==2.6.1
-dash-bootstrap-components==1.2.1
-dash-core-components==2.0.0
-dash-html-components==2.0.0
-dash-table==5.0.0
-dash-tools==1.8.2
-debugpy==1.6.3
-decorator==5.1.1
-distlib==0.3.6
-docopt==0.6.2
-entrypoints==0.4
-executing==0.10.0
-filelock==3.8.0
-Fiona @ file:///Users/runner/miniforge3/conda-bld/fiona_1653912066266/work
-Flask==2.1.3
-Flask-Compress==1.12
+dash_bootstrap_components==1.2.1
+dash_core_components==2.0.0
+dash_html_components==2.0.0
 folium==0.12.1.post1
-fonttools==4.25.0
-GDAL==3.5.1
 geopandas==0.11.1
-gunicorn==20.1.0
-identify==2.5.3
-idna==3.3
-importlib-metadata==4.12.0
-iniconfig==1.1.1
-ipykernel==6.15.1
-ipython==8.4.0
-itsdangerous==2.1.2
-jedi==0.18.1
-Jinja2==3.1.2
-joblib @ file:///tmp/build/80754af9/joblib_1635411271373/work
-jupyter-core==4.11.1
-jupyter-dash==0.4.0
-jupyter_client==7.3.5
-kiwisolver @ file:///private/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_69de275f-e01d-4033-8ea6-9caf70c31072d5uirqak/croots/recipe/kiwisolver_1653292042660/work
-mapclassify @ file:///tmp/build/80754af9/mapclassify_1627369494639/work
-MarkupSafe==2.1.1
+jupyter_dash==0.4.0
 matplotlib==3.5.1
-matplotlib-inline==0.1.6
-munch @ file:///Users/ktietz/demo/mc3/conda-bld/munch_1630566382504/work
-munkres==1.1.4
-nest-asyncio==1.5.5
-networkx @ file:///private/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_933ef3b6-ee83-4587-8504-0a5b7ab57771x59ln7a7/croots/recipe/networkx_1657784101196/work
-nodeenv==1.7.0
-numexpr @ file:///private/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_08e1f2b1-735c-4635-9755-5afc6d3eb18ew8ilpa0t/croots/recipe/numexpr_1656940301129/work
 numpy==1.22.3
-packaging==21.0
 pandas==1.4.2
-parso==0.8.3
-pexpect==4.8.0
-pickleshare==0.7.5
-Pillow==9.2.0
-pipreqs==0.4.11
-platformdirs==2.5.2
 plotly==5.9.0
-pluggy==0.13.1
-pre-commit==2.16.0
-prompt-toolkit==3.0.30
-psutil==5.9.1
-ptyprocess==0.7.0
-pure-eval==0.2.2
-py==1.11.0
-Pygments==2.13.0
-pyparsing @ file:///private/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_3b_3vxnd07/croots/recipe/pyparsing_1661452540919/work
-pyproj @ file:///Users/runner/miniforge3/conda-bld/pyproj_1655447483235/work
-pytest==6.2.2
-python-dateutil @ file:///tmp/build/80754af9/python-dateutil_1626374649649/work
-pytz @ file:///private/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_830e8540-4c59-42fe-9515-a6f79c24ff6dh653xa67/croots/recipe/pytz_1654762630628/work
-PyYAML==6.0
-pyzmq==23.2.1
-requests==2.28.1
-retrying==1.3.3
-Rtree @ file:///Users/ktietz/demo/mc3/conda-bld/rtree_1629286765756/work
-scikit-learn @ file:///private/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_c0267ca0-12ff-4800-bd07-7f998adef27bh_cts5yf/croots/recipe/scikit-learn_1658419411147/work
-scipy @ file:///private/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_00g7o_6fb8/croots/recipe/scipy_1661390408322/work
-seaborn==0.11.2
 Shapely==1.8.2
-six @ file:///tmp/build/80754af9/six_1644875935023/work
-stack-data==0.5.0
-tenacity==8.0.1
-termcolor==1.1.0
-threadpoolctl @ file:///Users/ktietz/demo/mc3/conda-bld/threadpoolctl_1629802263681/work
-toml==0.10.2
-tornado==6.2
-traitlets==5.3.0
-urllib3==1.26.12
-virtualenv==20.16.3
-wcwidth==0.2.5
-Werkzeug==2.0.3
-xlrd @ file:///tmp/build/80754af9/xlrd_1608072521494/work
-yarg==0.1.9
-yolk3k==0.9
-zipp==3.8.1
