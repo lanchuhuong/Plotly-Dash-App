@@ -1,19 +1,20 @@
-import numpy as np
+# import numpy as np
 import pandas as pd
 import pathlib
-import dash
-from jupyter_dash import JupyterDash
+# import dash
+# from jupyter_dash import JupyterDash
+from dash import Dash
 import plotly.express as px
 import geopandas as gpd
-from geopandas import GeoDataFrame
-from shapely.geometry import Point
-from matplotlib import pyplot as plt
-import folium
+# from geopandas import GeoDataFrame
+# from shapely.geometry import Point
+# from matplotlib import pyplot as plt
+# import folium
 import geopandas as gpd
-import plotly.offline as pyo
+# import plotly.offline as pyo
 import plotly.graph_objs as go
 from cProfile import label
-from optparse import Option
+# from optparse import Option
 import dash_core_components as dcc
 import dash_html_components as html
 import dash_bootstrap_components as dbc
@@ -180,7 +181,7 @@ tabs = dcc.Tabs([tab1, tab2, tab3])
 
 layout = html.Div([title, tabs, container])
 
-app = JupyterDash(__name__)
+app = Dash(__name__)
 app.layout = layout
 
 server = app.server
@@ -255,5 +256,6 @@ def update_plot(year_, continent):
     return fig1, fig2
 
 
-
-app.run_server(mode='inline', height=400, debug = False)
+if __name__ == '__main__':
+    # app.run_server(mode='inline', height=400, debug = False)
+    app.run_server(height=400, debug = False)
