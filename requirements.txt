@@ -12,3 +12,4 @@ plotly
 Shapely
 xlrd
 werkzeug
+gunicorn
