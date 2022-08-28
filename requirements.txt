@@ -6,3 +6,4 @@ geopandas==0.11.1
 pandas==1.4.2
 plotly==5.9.0
 gunicorn
+xlrd
