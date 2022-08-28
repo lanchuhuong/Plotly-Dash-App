@@ -10,3 +10,4 @@ numpy==1.22.3
 pandas==1.4.2
 plotly==5.9.0
 Shapely==1.8.2
+werkzeug==2.0.3
