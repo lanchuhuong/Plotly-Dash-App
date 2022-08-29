@@ -42,7 +42,7 @@ df_ghg_country = pd.merge(
     df_ghg_country, countries_gdf, left_on="iso_code", right_on="iso_a3"
 )
 
-df_gdp = pd.read_excel("Data/gdp_full.xls", sheet_name="Data")
+df_gdp = pd.read_csv("Data/gdp_full.csv")
 df_gdp = pd.melt(
     df_gdp, id_vars=["Country Name", "Country Code"], value_vars=df_gdp.iloc[:, -62:]
 )
