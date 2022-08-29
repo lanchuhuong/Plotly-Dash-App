@@ -2,7 +2,7 @@
 import pandas as pd
 import pathlib
 
-# import dash
+import dash
 # from jupyter_dash import JupyterDash
 from dash import Dash
 import plotly.express as px
@@ -126,7 +126,6 @@ fig = go.Figure(
         pathbar_textfont_size=15,
     )
 )
-# fig.show()
 
 
 fig_scatter = px.scatter(
@@ -148,6 +147,7 @@ fig_scatter = px.scatter(
 # fig_scatter.show()
 
 
+
 fig_scatter_slider = px.scatter(
     df_ghg_country.dropna(subset="GDP per capita (current US$)"),
     color="continent",
@@ -163,6 +163,8 @@ fig_scatter_slider = px.scatter(
     color_discrete_map={"Europe": "rgba(260,0,0,0.4)"},
 )
 # fig_scatter_slider.show()
+
+fig_scatter_plot= px.scatter_geo(df_ghg_country.dropna(subset = 'co2_per_capita'), locations="iso_code", color="continent",hover_name="country", size="co2_per_capita")
 
 
 color_discrete_map = {
@@ -210,16 +212,11 @@ container = html.Div(
     ]
 )
 
-tab1 = dcc.Tab(
-    [dcc.Graph(id="year0", figure=fig_scatter_slider)],
-    label="Animated Co2 per capita (tonnes) vs. GDP per capita",
-)
-tab2 = dcc.Tab(
-    [dcc.Graph(id="year1", figure=fig_scatter)],
-    label="Scatter Co2 per capita (tonnes) vs. GDP per capita",
-)
-tab3 = dcc.Tab([dcc.Graph(id="year2", figure=fig)], label="Treemap Co2 per capita")
-tabs = dcc.Tabs([tab1, tab2, tab3])
+tab0 = dcc.Tab([dcc.Graph(id = "year3",figure = fig_scatter_plot )], label = "Overview")
+tab1 = dcc.Tab([dcc.Graph(id = "year0",figure = fig_scatter_slider )], label = "Animated Co2 per capita (tonnes) vs. GDP per capita")
+tab2 = dcc.Tab([dcc.Graph(id="year1", figure= fig_scatter)], label= "Scatter Co2 per capita (tonnes) vs. GDP per capita")
+tab3 = dcc.Tab([dcc.Graph(id="year2",figure= fig)], label="Treemap Co2 per capita")
+tabs = dcc.Tabs([tab0, tab1, tab2, tab3])
 
 layout = html.Div([title, tabs, container])
 
@@ -232,18 +229,37 @@ server = app.server
 @app.callback(
     # Set the input and output of the callback to link the dropdown to the graph
     # Output(component_id='year0',component_property='figure'),
+    Output(component_id='year3', component_property='figure'),
     Output(component_id="year1", component_property="figure"),
     Output(component_id="year2", component_property="figure"),
     Input(component_id="dropdown_year", component_property="value"),
     [Input(component_id="dropdown_continent", component_property="value")],
 )
 def update_plot(year_, continent):
-    if continent is None:
-        mask = -1 == df_ghg_country["year"]
+    if continent is None: 
+        mask = (-1 == df_ghg_country['year'])
     else:
-        mask = (year_ == df_ghg_country["year"]) & (
-            df_ghg_country["continent"].isin(continent)
-        )
+        mask = (year_ == df_ghg_country['year']) & (df_ghg_country['continent'].isin(continent))
+
+
+    fig0 = px.scatter_geo(df_ghg_country[mask].dropna(subset = 'co2_per_capita'), locations="iso_code", color="continent",
+                     hover_name="country", size="co2_per_capita",
+        color_discrete_map = {
+    "Asia": "teal",
+    "Africa": "purple",
+    "Europe": "pink",
+    "Antarctica": "orange",
+    "South America": "dark red",
+    "Oceania": "blue",
+    "North America": "yellow"
+},
+        color_continuous_scale=px.colors.cyclical.IceFire,
+    )
+
+    if continent is None: 
+        mask = (-1 == df_ghg_country['year'])
+    else:
+        mask = (year_ == df_ghg_country['year']) & (df_ghg_country['continent'].isin(continent))
 
     fig1 = px.scatter(
         df_ghg_country[mask].dropna(subset="GDP per capita (current US$)"),
@@ -275,10 +291,6 @@ def update_plot(year_, continent):
         )  # & (~(df_ghg_total['country'].isin(continent[:-1])))
         mask = mask_year & mask_continent
 
-        # mask = (year_ == df_ghg_total['year']) & (df_ghg_total['continent'].isin(continent)) # & (~(df_ghg_total['country'].isin(continent[:-1]))))
-        # mask2 = (year_ == df_ghg_total['year']) & (df_ghg_total['country'].isin(continent[:-1]))
-        # df_ghg_total[df_ghg_total.continent == 'world'] = df_ghg_total[mask2].co2_per_capita.sum()
-
     fig2 = go.Figure(
         go.Treemap(
             labels=df_ghg_total[mask]["country"],
@@ -292,10 +304,7 @@ def update_plot(year_, continent):
         )
     )
 
-    # locations = df_ghg_country['iso_code']
-    # fig2 =  px.choropleth(df_ghg_country[mask], locations='iso_code', color='co2_per_capita', animation_frame='Year')
-    # fig2.layout.coloraxis.colorbar.title = 'tCo2'
-    return fig1, fig2
+    return fig0, fig1, fig2
 
 
 if __name__ == "__main__":
