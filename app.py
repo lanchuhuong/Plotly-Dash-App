@@ -2,11 +2,9 @@
 import pandas as pd
 import pathlib
 
-import dash
 # from jupyter_dash import JupyterDash
 from dash import Dash
 import plotly.express as px
-import geopandas as gpd
 
 # from geopandas import GeoDataFrame
 # from shapely.geometry import Point
@@ -15,8 +13,6 @@ import geopandas as gpd
 import geopandas as gpd
 
 # import plotly.offline as pyo
-import plotly.graph_objs as go
-from cProfile import label
 
 # from optparse import Option
 from dash import dcc, html
@@ -106,11 +102,10 @@ df_ghg_total = pd.concat(
 )
 
 
-
 mask = df_ghg_total.year == 2020
 df_tmp = (
     df_ghg_total[mask]
-    .dropna(subset="co2_per_capita")[["country", "continent", "co2_per_capita"]]
+    .dropna(subset=["co2_per_capita"])[["country", "continent", "co2_per_capita"]]
     .fillna("")
 )
 
@@ -147,7 +142,6 @@ fig_scatter = px.scatter(
 # fig_scatter.show()
 
 
-
 fig_scatter_slider = px.scatter(
     df_ghg_country.dropna(subset="GDP per capita (current US$)"),
     color="continent",
@@ -164,7 +158,13 @@ fig_scatter_slider = px.scatter(
 )
 # fig_scatter_slider.show()
 
-fig_scatter_plot= px.scatter_geo(df_ghg_country.dropna(subset = 'co2_per_capita'), locations="iso_code", color="continent",hover_name="country", size="co2_per_capita")
+fig_scatter_plot = px.scatter_geo(
+    df_ghg_country.dropna(subset="co2_per_capita"),
+    locations="iso_code",
+    color="continent",
+    hover_name="country",
+    size="co2_per_capita",
+)
 
 
 color_discrete_map = {
@@ -212,10 +212,16 @@ container = html.Div(
     ]
 )
 
-tab0 = dcc.Tab([dcc.Graph(id = "year3",figure = fig_scatter_plot )], label = "Overview")
-tab1 = dcc.Tab([dcc.Graph(id = "year0",figure = fig_scatter_slider )], label = "Animated Co2 per capita (tonnes) vs. GDP per capita")
-tab2 = dcc.Tab([dcc.Graph(id="year1", figure= fig_scatter)], label= "Scatter Co2 per capita (tonnes) vs. GDP per capita")
-tab3 = dcc.Tab([dcc.Graph(id="year2",figure= fig)], label="Treemap Co2 per capita")
+tab0 = dcc.Tab([dcc.Graph(id="year3", figure=fig_scatter_plot)], label="Overview")
+tab1 = dcc.Tab(
+    [dcc.Graph(id="year0", figure=fig_scatter_slider)],
+    label="Animated Co2 per capita (tonnes) vs. GDP per capita",
+)
+tab2 = dcc.Tab(
+    [dcc.Graph(id="year1", figure=fig_scatter)],
+    label="Scatter Co2 per capita (tonnes) vs. GDP per capita",
+)
+tab3 = dcc.Tab([dcc.Graph(id="year2", figure=fig)], label="Treemap Co2 per capita")
 tabs = dcc.Tabs([tab0, tab1, tab2, tab3])
 
 layout = html.Div([title, tabs, container])
@@ -229,37 +235,44 @@ server = app.server
 @app.callback(
     # Set the input and output of the callback to link the dropdown to the graph
     # Output(component_id='year0',component_property='figure'),
-    Output(component_id='year3', component_property='figure'),
+    Output(component_id="year3", component_property="figure"),
     Output(component_id="year1", component_property="figure"),
     Output(component_id="year2", component_property="figure"),
     Input(component_id="dropdown_year", component_property="value"),
     [Input(component_id="dropdown_continent", component_property="value")],
 )
 def update_plot(year_, continent):
-    if continent is None: 
-        mask = (-1 == df_ghg_country['year'])
+    if continent is None:
+        mask = -1 == df_ghg_country["year"]
     else:
-        mask = (year_ == df_ghg_country['year']) & (df_ghg_country['continent'].isin(continent))
+        mask = (year_ == df_ghg_country["year"]) & (
+            df_ghg_country["continent"].isin(continent)
+        )
 
-
-    fig0 = px.scatter_geo(df_ghg_country[mask].dropna(subset = 'co2_per_capita'), locations="iso_code", color="continent",
-                     hover_name="country", size="co2_per_capita",
-        color_discrete_map = {
-    "Asia": "teal",
-    "Africa": "purple",
-    "Europe": "pink",
-    "Antarctica": "orange",
-    "South America": "dark red",
-    "Oceania": "blue",
-    "North America": "yellow"
-},
+    fig0 = px.scatter_geo(
+        df_ghg_country[mask].dropna(subset="co2_per_capita"),
+        locations="iso_code",
+        color="continent",
+        hover_name="country",
+        size="co2_per_capita",
+        color_discrete_map={
+            "Asia": "teal",
+            "Africa": "purple",
+            "Europe": "pink",
+            "Antarctica": "orange",
+            "South America": "dark red",
+            "Oceania": "blue",
+            "North America": "yellow",
+        },
         color_continuous_scale=px.colors.cyclical.IceFire,
     )
 
-    if continent is None: 
-        mask = (-1 == df_ghg_country['year'])
+    if continent is None:
+        mask = -1 == df_ghg_country["year"]
     else:
-        mask = (year_ == df_ghg_country['year']) & (df_ghg_country['continent'].isin(continent))
+        mask = (year_ == df_ghg_country["year"]) & (
+            df_ghg_country["continent"].isin(continent)
+        )
 
     fig1 = px.scatter(
         df_ghg_country[mask].dropna(subset="GDP per capita (current US$)"),
