@@ -125,7 +125,7 @@ fig = go.Figure(
 
 fig_scatter = px.scatter(
     df_ghg_country[df_ghg_country["year"] == 2016].dropna(
-        subset="GDP per capita (current US$)"
+        subset=["GDP per capita (current US$)"]
     ),
     color="continent",
     size="population",
@@ -143,7 +143,7 @@ fig_scatter = px.scatter(
 
 
 fig_scatter_slider = px.scatter(
-    df_ghg_country.dropna(subset="GDP per capita (current US$)"),
+    df_ghg_country.dropna(subset=["GDP per capita (current US$)"]),
     color="continent",
     size="population",
     color_continuous_scale=px.colors.cyclical.IceFire,
@@ -159,7 +159,7 @@ fig_scatter_slider = px.scatter(
 # fig_scatter_slider.show()
 
 fig_scatter_plot = px.scatter_geo(
-    df_ghg_country.dropna(subset="co2_per_capita"),
+    df_ghg_country.dropna(subset=["co2_per_capita"]),
     locations="iso_code",
     color="continent",
     hover_name="country",
@@ -250,7 +250,7 @@ def update_plot(year_, continent):
         )
 
     fig0 = px.scatter_geo(
-        df_ghg_country[mask].dropna(subset="co2_per_capita"),
+        df_ghg_country[mask].dropna(subset=["co2_per_capita"]),
         locations="iso_code",
         color="continent",
         hover_name="country",
@@ -275,7 +275,7 @@ def update_plot(year_, continent):
         )
 
     fig1 = px.scatter(
-        df_ghg_country[mask].dropna(subset="GDP per capita (current US$)"),
+        df_ghg_country[mask].dropna(subset=["GDP per capita (current US$)"]),
         color="continent",
         color_discrete_map={
             "Asia": "teal",
