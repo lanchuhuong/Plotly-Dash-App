@@ -226,13 +226,13 @@ tabs = dcc.Tabs([tab0, tab1, tab2, tab3])
 
 layout = html.Div([title, tabs, container])
 
-app = Dash(__name__)
-app.layout = layout
+dash_app = Dash(__name__)
+dash_app.layout = layout
 
-server = app.server
+app = dash_app.server
 
 
-@app.callback(
+@dash_app.callback(
     # Set the input and output of the callback to link the dropdown to the graph
     # Output(component_id='year0',component_property='figure'),
     Output(component_id="year3", component_property="figure"),
@@ -322,4 +322,4 @@ def update_plot(year_, continent):
 
 if __name__ == "__main__":
     # app.run_server(mode='inline', height=400, debug = False)
-    app.run_server(debug=False)
+    dash_app.run_server(debug=False)
